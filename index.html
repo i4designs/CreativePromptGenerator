@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Creative Prompt Generator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Alegreya%20Sans'>
+<style>
+  @font-face {
+  font-family: 'Bebas Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Bebas Neue Regular'), local('BebasNeue-Regular'), url(https://fonts.gstatic.com/s/bebasneue/v1/JTUSjIg69CK48gW7PXoo9Wlhzg.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFVZ0e.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNZ.ttf) format('truetype');
+}
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+}
+body,
+html {
+  height: 100%;
+  background-image: url("https://i.ytimg.com/vi/nFHUVXJp8Y4/maxresdefault.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+* {
+  box-sizing: border-box;
+}
+.bg-image {
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+}
+.textbox {
+  background-color: #000000;
+  /* Fallback color */
+  background-color: rgba(255, 255, 255, 0.4);
+  /* White w/opacity/see-through */
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 65%;
+  padding: 20px;
+  text-align: center;
+}
+#Title {
+  font-family: "Bebas Neue", cursive;
+  font-size: 48px;
+}
+h2 {
+  font-family: Noto Sans, sans-serif;
+}
+p {
+  text-align: center;
+  font-family: "Alegreya Sans";
+  font-size: 18px;
+}
+#btnRefresh {
+  background: #4caf50;
+  border: none;
+  border-radius: 16px;
+  color: white;
+  line-height: 30px;
+  margin-top: 20px;
+  padding: 15px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  cursor: pointer;
+}
+#btnRefresh:hover {
+  background: darkgreen;
+}
+#displayWho {
+  background-color: #99d6ff;
+  padding: 2px;
+  text-size: inherit;
+}
+#displayWhat {
+  background-color: #99ff99;
+  padding: 2px;
+}
+#displayWhere {
+  background-color: #ffff99;
+  padding: 2px;
+}
+#displayWhen {
+  background-color: #ffb3ff;
+  padding: 2px;
+}
+#displayHow {
+  background-color: #ffccb3;
+  padding: 2px;
+}
+#CreativePrompt {
+  padding: 24px;
+  font-size: 28px;
+}
+.datafield {
+  height: 40px;
+  width: 80%;
+  text-align: center;
+  font-size: 28px;
+  font-family: "Open Sans", sans-serif;
+}
+</style>
+<script>
+  window.console = window.console || function(t) {};
+</script>
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+</head>
+<body translate="no">
+<div class="bg-image"></div>
+<div class="textbox">
+<h1 id="Title">Creative Prompt Generator</h1>
+<p>Use this random Prompt generator to come up with an idea for your next writing prompt or drawing!</p>
+
+<div id="CreativePrompt">
+<span id="displayWho" class="datafield"></span>
+<span id="displayWhat" class="datafield"></span>
+<span id="displayWhere" class="datafield"></span>
+<span id="displayHow" class="datafield"></span>
+<span id="displayWhen" class="datafield"></span>.
+</div>
+<div id="btnRefresh" class="material-icons">&#xe5d5;</div>
+</div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script id="rendered-js">
+      // Create Who list
+var listWho = [
+"An astronaut is",
+"An alien is",
+//"A doctor is",
+"A scientist is",
+//"An actor is",
+//"A writer is",
+//"A photographer is",
+//"A pilot is",
+"You are",
+//"A kid is",
+//"An animal is",
+//"A teacher is",
+//"A police officer is",
+//"A fire fighter is",
+//"A nurse is",
+//"A ninja is",
+//"A dinosaur is",
+"A robot is"];
+
+
+// Create What list
+var listWhat = [
+"sleeping",
+"walking",
+"running",
+"standing",
+//"looking",
+"exploring",
+//"creating",
+//"writing",
+//"painting",
+"observing",
+"jumping",
+"eating food",
+"floating",
+"flying"];
+
+
+// Create Where list
+var listWhere = [
+"at home",
+//"in an/the office",
+"in a laboratory",
+//"at a factory",
+"underwater",
+"in space",
+"on an Alien Planet/Moon",
+"on a Solar System Planet/Moon"
+//"at school",
+//"at the the park",
+//"at the the pool"
+];
+
+// Create When list
+var listWhen = [
+"in the past",
+" ",
+"in the future",
+"during the day"
+//"at night",
+//"after school"
+];
+
+// Create How list
+var listHow = [
+//"in a car",
+"in a spaceship",
+"in a rocket",
+"on a rover",
+"by a satellite",
+"in a space station"
+//"by a space station"
+//"on a horse",
+//"in an airplane",
+//"in a firetruck",
+//"in a police car",
+//"on a bicycle",
+//"on a motorcycle",
+//"on a unicycle",
+//"on a dinosaur",
+//"in a boat"
+//"in a seaplane"
+];
+
+/*min = 0;
+   maxWho = listWho.length - 1;
+   maxWhat = listWhat.length - 1;
+   maxWhere = listWhere.length - 1;
+   maxWhen = listWhen.length - 1;
+   maxHow = listHow.length - 1;*/
+
+function randomizer() {
+  //do the math
+  //var Who1 = Math.floor(Math.random() * (maxWho - min + 1)) + min;
+  var Who1 = Math.floor(Math.random() * listWho.length);
+  //var What1 = Math.floor(Math.random() * (maxWhat - min + 1)) + min;
+  var What1 = Math.floor(Math.random() * listWhat.length);
+  //var Where1 = Math.floor(Math.random() * (maxWhere - min + 1)) + min;
+  var Where1 = Math.floor(Math.random() * listWhere.length);
+  //var When1 = Math.floor(Math.random() * (maxWhen - min + 1)) + min;
+  var When1 = Math.floor(Math.random() * listWhen.length);
+  //var How1 = Math.floor(Math.random() * (maxHow - min + 1)) + min;
+  var How1 = Math.floor(Math.random() * listHow.length);
+
+  //output
+  $("#displayWho").text(listWho[Who1]);
+  $("#displayWhat").text(listWhat[What1]);
+  $("#displayWhere").text(listWhere[Where1]);
+  $("#displayWhen").text(listWhen[When1]);
+  $("#displayHow").text(listHow[How1]);
+}
+
+randomizer();
+
+$("#btnRefresh").click(function () {
+  randomizer();
+});
+      //# sourceURL=pen.js
+    </script>
+</body>
+</html>
